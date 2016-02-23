@@ -17,8 +17,6 @@ difference(){
 
 }
 
-
-
 scale=1.0; // scaling factor for the whole model
 radius=60*scale; // escapement wheel radius, including the teeth
 thickness=5*scale; // thickness along the Z axis
@@ -39,10 +37,27 @@ armAngle=22; // angle of the escapement's arms
 armWidth=5*scale; //width of the escapement's arms
 hubWidth=10*scale; //width of the escapement's hub
 
-escapementWheel(radius,rimWidth,thickness,numberTeeth,toothLength,toothLean,toothSharpness,numberSpokes,spokeWidth,hubWidth,bore);
+//escapementWheel(radius,rimWidth,thickness,numberTeeth,toothLength,toothLean,toothSharpness,numberSpokes,spokeWidth,hubWidth,bore);
+//
+//translate([0,0,5])
+//klosje();
 
-translate([0,0,5])
-klosje();
+translate([0,2*radius*cos(180/numberTeeth*toothSpan),0])
+escapement(radius,thickness,faceAngle,armAngle,armWidth,numberTeeth,toothSpan,hubWidth,bore);
+
+// ding om slinger aan vast te maken
+difference () {
+    translate([-5,90,0])
+    cube ([10,50,5], center=false);
+    translate([0,104,-5])
+    union () {
+        cylinder(h=20, r=2, center = false);
+        translate([0,30,0])
+        cylinder(h=20, r=2, center = false);
+    }
+}
+
+
 
 //translate([0,0,5])
 //gear (
